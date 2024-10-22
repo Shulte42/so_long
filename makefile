@@ -1,46 +1,58 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/10/22 14:16:38 by bruda-si          #+#    #+#              #
+#    Updated: 2024/10/22 15:00:55 by bruda-si         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
+
+NAME	=	so_long
+CC		=	gcc
+CFLAGS 	= 	-Wall -Wextra -Werror -g -I
+RM		=	rm -f
 # Directories
 SRC_DIR = src/
 OBJ_DIR = obj/
-LIB_DIR = lib/
 
 # Libraries
-LIBS = -L$(LIB_DIR) -Lminilibx-linux -lz -lXext -lX11 -lm
+LIBS = -Lminilibx-linux -lz -lXext -lX11 -lm
 MLX	= minilibx-linux/libmlx.a
 
 # Include directory
 INC = inc/
 
 # Source files
-SRCS = $(SRC_DIR)main.c  # Adicione todos os arquivos .c aqui
-
-# Object files
-OBJS = $(OBJ_DIR)main.o  # Adicione todos os arquivos .o correspondentes aqui
-
-# Executable
-NAME = so_long
-
-# Rules
+SRCS	=	$(SRC_DIR)main.c \
+			$(SRC_DIR)get_next_line.c
+			
+OBJS	=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+					
 all: $(NAME)
 
-$(MLX):
-			make -C ./minilibx-linux
 
 $(NAME): $(OBJS) $(MLX)
-	$(CC) $(CFLAGS) -I$(INC) -o $@ $^ $(LIBS)
+	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LIBS)
+
+$(MLX):
+	@make -C minilibx-linux
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
+	@$(RM) -r $(OBJ_DIR)
+	@make clean -C ./minilibx-linux
 
 fclean: clean
-	rm -f $(NAME)
-
+		@$(RM) $(NAME)
+		@$(RM) $(MLX)
+	
 re: fclean all
 
 .PHONY: all clean fclean re
