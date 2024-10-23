@@ -6,7 +6,7 @@
 #    By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 14:16:38 by bruda-si          #+#    #+#              #
-#    Updated: 2024/10/22 15:00:55 by bruda-si         ###   ########.fr        #
+#    Updated: 2024/10/23 13:01:31 by bruda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ INC = inc/
 
 # Source files
 SRCS	=	$(SRC_DIR)main.c \
-			$(SRC_DIR)get_next_line.c
+			$(SRC_DIR)get_next_line.c \
+			$(SRC_DIR)validade_map.c
 			
 OBJS	=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 					

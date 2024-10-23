@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/22 17:22:11 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:03:10 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 #define WEIGHT  400
 #define HEIGHT  400
 
-int	ft_copy_map(t_struct *so_long, char fd)
+int	ft_copy_map(t_struct *so_long, char *fd)
 {
 	int	i;
+	int x;
 
 	i = 0;
+	x = 0;
 	so_long->fd = open(fd, O_RDONLY, 0);
 	so_long->map = malloc(sizeof(char *) * (so_long->map_height + 1));
 	so_long->map_copy = malloc(sizeof(char *) * (so_long->map_height + 1));
@@ -31,7 +33,7 @@ int	ft_copy_map(t_struct *so_long, char fd)
 	while (i < so_long->map_height)
 	{
 		so_long->map[i] = ft_get_next_line(so_long->fd);
-		so_long->map_copy[i] = ft_get_next_line(so_long->fd);
+		so_long->map_copy[i] = so_long->map[i];
 		i++; 
 	}
 	so_long->map[i] = NULL;
@@ -140,8 +142,9 @@ int  main(int argc, char **argv)
 
 	ft_arg_checker(argc, argv);
 	ft_memset(&so_long, 0, (sizeof(so_long)));
-	if (!ft_check_retangle(&so_long, argv[1]
-		|| !ft_copy_map(&so_long, argv[1])))
+	if (!ft_check_retangle(&so_long, argv[1]) ||
+		!ft_copy_map(&so_long, argv[1]) ||
+		!ft_check_components(&so_long))
 		return (0);
 	so_long.mlx_ptr = mlx_init();
 	if (!so_long.mlx_ptr)
