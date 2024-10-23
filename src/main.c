@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/23 15:07:12 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:29:45 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ int  main(int argc, char **argv)
 	ft_memset(&so_long, 0, (sizeof(so_long)));
 	if (!ft_check_retangle(&so_long, argv[1]) ||
 		!ft_copy_map(&so_long, argv[1]) ||
-		!ft_check_components(&so_long))
+		!ft_check_components(&so_long) ||
+		!ft_check_player(&so_long))
 		return (0);
 	so_long.mlx_ptr = mlx_init();
 	if (!so_long.mlx_ptr)

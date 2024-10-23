@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/23 13:01:02 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:30:14 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,22 @@
 
 typedef struct t_struct
 {
-    void    *mlx_display;
-    void    *mlx_ptr;
-    char    **map;
-    char    **map_copy;
-    int     fd;
-    int     map_height;
-    int     map_weidth;
-    
+	void    *mlx_display;
+	void    *mlx_ptr;
+	char    **map;
+	char    **map_copy;
+	int     fd;
+	int     map_height;
+	int     map_weidth;
+	int     player_x;
+	int     player_y;
+	int		player;
+	
 }   t_struct;
 
 char	*ft_get_next_line(int fd);
 int ft_check_components(t_struct *so_long);
+int	ft_check_player(t_struct *so_long);
 
 
 #endif
