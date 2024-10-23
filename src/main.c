@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/23 15:03:10 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:07:12 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@
 int	ft_copy_map(t_struct *so_long, char *fd)
 {
 	int	i;
-	int x;
 
 	i = 0;
-	x = 0;
 	so_long->fd = open(fd, O_RDONLY, 0);
 	so_long->map = malloc(sizeof(char *) * (so_long->map_height + 1));
 	so_long->map_copy = malloc(sizeof(char *) * (so_long->map_height + 1));

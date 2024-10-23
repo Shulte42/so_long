@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 12:40:28 by bruda-si          #+#    #+#             */
-/*   Updated: 2024/10/23 13:50:04 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:12:48 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,9 @@ int ft_check_components(t_struct *so_long)//contagem de linhas incorrerta
 {
     int x;
     int y;
-    int i;
-    
-    i = 0;
+
     y = 0;
-    while (so_long->map[i++])
-        printf("%d\n", i);
-    while (so_long->map[y][0])
+    while (so_long->map[y])
     {
         // printf("Linha Y:%d\n", y);
         x = 0;
