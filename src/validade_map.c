@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 12:40:28 by bruda-si          #+#    #+#             */
-/*   Updated: 2024/10/24 11:40:39 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:36:25 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,32 @@ bool	ft_check_exit(t_struct *so_long)
 	return (false);
 }
 
+bool	ft_check_walls(t_struct *so_long)
+{
+	int	y;
+	int x;
+
+	y = 0;
+	while (y < so_long->map_height)
+	{
+		x = 0;
+		if (y == 0 || y == so_long->map_height -1)
+		{
+			while (x < so_long->map_weidth)
+			{
+				if (so_long->map[y][x] != '1')
+					return (true);
+				x++;
+			}
+		}
+		else
+			if (so_long->map[y][0] != '1' || so_long->map[y][so_long->map_weidth - 1] != '1')
+				return (true);
+		y++;
+	}
+	return (false);
+}
+
 bool	ft_full_check(t_struct *so_long)
 {
 	if (ft_check_components(so_long))
@@ -130,6 +156,8 @@ bool	ft_full_check(t_struct *so_long)
 	if (ft_check_player(so_long))
 		return (true);
 	if (ft_check_collectables(so_long))
+		return (true);
+	if (ft_check_walls(so_long))
 		return (true);
 	return (false);
 }

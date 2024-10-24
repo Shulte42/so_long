@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/24 14:37:23 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:45:19 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,19 +130,19 @@ void    ft_arg_checker(int argc, char **argv)
 		exit(0);
 	}
 }
-void	ft_free_maps(t_struct *game)
+void	ft_free_maps(t_struct *so_long)
 {
 	int	i;
 
 	i = 0;
-	while (game->map[i] && game->map_copy[i])
+	while (so_long->map[i] && so_long->map_copy[i])
 	{
-		free(game->map[i]);
-		free(game->map_copy[i]);
+		free(so_long->map[i]);
+		free(so_long->map_copy[i]);
 		i++;
 	}
-	free(game->map);
-	free(game->map_copy);
+	free(so_long->map);
+	free(so_long->map_copy);
 }
 
 // void    on_keypress(int   keysym, t_struct so_long)
