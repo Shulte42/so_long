@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/24 11:38:40 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:37:23 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 bool	ft_copy_map(t_struct *so_long, char *fd)
 {
 	int	i;
+	char *map_copy_ptr;
 
 	i = 0;
 	so_long->fd = open(fd, O_RDONLY, 0);
@@ -31,7 +32,8 @@ bool	ft_copy_map(t_struct *so_long, char *fd)
 	while (i < so_long->map_height)
 	{
 		so_long->map[i] = ft_get_next_line(so_long->fd);
-		so_long->map_copy[i] = so_long->map[i];
+		map_copy_ptr = ft_strdup(so_long->map[i]);
+		so_long->map_copy[i] = map_copy_ptr;
 		i++; 
 	}
 	so_long->map[i] = NULL;
@@ -135,14 +137,10 @@ void	ft_free_maps(t_struct *game)
 	i = 0;
 	while (game->map[i] && game->map_copy[i])
 	{
-		// printf("game.map[%d]:%s\n", i, game->map[i]);
 		free(game->map[i]);
-		printf("game.map_copy[%d]:%s\n", i, game->map_copy[i]);
 		free(game->map_copy[i]);
 		i++;
 	}
-	// printf("after free game.map[%d]:%s\n", i, game->map[i]);
-	// printf("after free game.map_copy[%d]:%s\n", i, game->map_copy[i]);
 	free(game->map);
 	free(game->map_copy);
 }

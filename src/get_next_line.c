@@ -6,13 +6,13 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:56:18 by bruda-si          #+#    #+#             */
-/*   Updated: 2024/10/22 13:59:50 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:33:44 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-size_t	ft_strlen(char *s)
+size_t	ft_strlen_sizet(char *s)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_nlcut(char *new_line)
+char	*ft_nlcut_gnl(char *new_line)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ char	*ft_nlcut(char *new_line)
 	return (new_line);
 }
 
-int	ft_nlhandle(char *buffer)
+int	ft_nlhandle_gnl(char *buffer)
 {
 	int	i;
 	int	k;
@@ -61,7 +61,7 @@ int	ft_nlhandle(char *buffer)
 	return (nl);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char	*s3;
 	int		i;
@@ -69,7 +69,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	k = 0;
-	s3 = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	s3 = (char *)malloc(ft_strlen_sizet(s1) + ft_strlen_sizet(s2) + 1);
 	if (s3 == NULL)
 		return (NULL);
 	while (s1 && s1[i])
@@ -83,7 +83,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	s3[i] = '\0';
 	free(s1);
-	return (ft_nlcut(s3));
+	return (ft_nlcut_gnl(s3));
 }
 
 char	*ft_get_next_line(int fd)
@@ -102,8 +102,8 @@ char	*ft_get_next_line(int fd)
 	}
 	while (buffer[0] || read(fd, buffer, BUFFER_SIZE) > 0)
 	{
-		new_line = ft_strjoin(new_line, buffer);
-		if (ft_nlhandle(buffer) == 1)
+		new_line = ft_strjoin_gnl(new_line, buffer);
+		if (ft_nlhandle_gnl(buffer) == 1)
 			break ;
 	}
 	return (new_line);

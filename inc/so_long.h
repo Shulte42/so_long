@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/24 11:28:56 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:17:15 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <stdbool.h>
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
+# include "../libft/inc/libft.h"
 // # include "get_next_line.h"
 
 typedef struct t_struct

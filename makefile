@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lede-gui <lede-gui@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 14:16:38 by bruda-si          #+#    #+#              #
-#    Updated: 2024/10/24 12:07:35 by lede-gui         ###   ########.fr        #
+#    Updated: 2024/10/24 14:14:01 by bruda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ OBJ_DIR = obj/
 
 # Libraries
 LIBS = -Lminilibx-linux -lz -lXext -lX11 -lm
-MLX	= minilibx-linux/libmlx.a
+MLX	=	minilibx-linux/libmlx.a
+LIBFT_DIR	=	libft/
+LIBFT	=	$(LIBFT_DIR)libft.a
 
 # Include directory
 INC = inc/
@@ -36,11 +38,14 @@ OBJS	=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 all: $(NAME)
 
 
-$(NAME): $(OBJS) $(MLX)
+$(NAME): $(OBJS) $(MLX) $(LIBFT)
 	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LIBS)
 
 $(MLX):
 	@$(MAKE) -C minilibx-linux
+
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
@@ -49,10 +54,12 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 clean:
 	@$(RM) -r $(OBJ_DIR)
 	@$(MAKE) clean -C ./minilibx-linux
+	@$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean: clean
 		@$(RM) $(NAME)
 		@$(RM) $(MLX)
+		@$(RM) $(LIBFT)
 
 re: fclean all
 
