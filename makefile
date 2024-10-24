@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: lede-gui <lede-gui@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 14:16:38 by bruda-si          #+#    #+#              #
-#    Updated: 2024/10/23 13:01:31 by bruda-si         ###   ########.fr        #
+#    Updated: 2024/10/24 12:07:35 by lede-gui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,9 @@ INC = inc/
 SRCS	=	$(SRC_DIR)main.c \
 			$(SRC_DIR)get_next_line.c \
 			$(SRC_DIR)validade_map.c
-			
+
 OBJS	=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
-					
+
 all: $(NAME)
 
 
@@ -40,7 +40,7 @@ $(NAME): $(OBJS) $(MLX)
 	$(CC) $(CFLAGS) $(INC) -o $@ $^ $(LIBS)
 
 $(MLX):
-	@make -C minilibx-linux
+	@$(MAKE) -C minilibx-linux
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
@@ -48,12 +48,12 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 clean:
 	@$(RM) -r $(OBJ_DIR)
-	@make clean -C ./minilibx-linux
+	@$(MAKE) clean -C ./minilibx-linux
 
 fclean: clean
 		@$(RM) $(NAME)
 		@$(RM) $(MLX)
-	
+
 re: fclean all
 
 .PHONY: all clean fclean re
