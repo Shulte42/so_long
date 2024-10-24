@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/23 15:30:14 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:28:56 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,21 @@ typedef struct t_struct
 	int     player_x;
 	int     player_y;
 	int		player;
+	int		collectables;
+	int		exit;
 	
 }   t_struct;
 
+bool	ft_full_check(t_struct *so_long);
 char	*ft_get_next_line(int fd);
-int ft_check_components(t_struct *so_long);
-int	ft_check_player(t_struct *so_long);
+bool	ft_check_components(t_struct *so_long);
+bool	ft_check_player(t_struct *so_long);
+bool	ft_check_collectables(t_struct	*so_long);
+bool	ft_check_exit(t_struct *so_long);
+int	ft_print_string(char *str);
+void	ft_free_maps(t_struct *game);
+
+
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/23 15:29:45 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/24 11:38:40 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define WEIGHT  400
 #define HEIGHT  400
 
-int	ft_copy_map(t_struct *so_long, char *fd)
+bool	ft_copy_map(t_struct *so_long, char *fd)
 {
 	int	i;
 
@@ -25,8 +25,8 @@ int	ft_copy_map(t_struct *so_long, char *fd)
 	so_long->map_copy = malloc(sizeof(char *) * (so_long->map_height + 1));
 	if (!so_long->map || !so_long->map_copy)
 	{
-		write(1, "Fail Allocate Memory for the Map!\n", 35);
-		return (0);
+		ft_print_string("Fail Allocate Memory for the Map!\n");
+		return (true);
 	}
 	while (i < so_long->map_height)
 	{
@@ -37,7 +37,7 @@ int	ft_copy_map(t_struct *so_long, char *fd)
 	so_long->map[i] = NULL;
 	so_long->map_copy[i] = NULL;
 	close(so_long->fd);
-	return (1);
+	return (false);
 }
 
 int	ft_strlen_gnl(char *str)
@@ -52,7 +52,7 @@ int	ft_strlen_gnl(char *str)
 	return (i);
 }
 
-int	ft_check_retangle(t_struct *so_long, char *fd)
+bool	ft_check_retangle(t_struct *so_long, char *fd)
 {
 	char	*line;
 
@@ -60,7 +60,7 @@ int	ft_check_retangle(t_struct *so_long, char *fd)
 	so_long->map_height = 0;
 	line = ft_get_next_line(so_long->fd);
 	if (!line)
-		return (0);
+		return (true);
 	so_long->map_weidth = ft_strlen_gnl(line);
 	while (line)
 	{
@@ -68,8 +68,8 @@ int	ft_check_retangle(t_struct *so_long, char *fd)
 		{
 			free(line);
 			close(so_long->fd);
-			write(1, "Map not Allowed!\n", 17);
-			return (0);
+			ft_print_string("Map not Allowed!\n");
+			return (true);
 		}
 		free(line);
 		line = ft_get_next_line(so_long->fd);
@@ -77,7 +77,7 @@ int	ft_check_retangle(t_struct *so_long, char *fd)
 	}
 	free(line);
 	close(so_long->fd);
-	return (1);
+	return (false);
 }
 
 void	*ft_memset(void *ptr, int ch, size_t n)
@@ -116,7 +116,7 @@ void    ft_arg_checker(int argc, char **argv)
 	i = 0;
 	if (argc != 2)
 	{
-		write(1, "Invalid Arguments!\n", 19);
+		ft_print_string("Invalid Arguments!\n");
 		exit(0);
 	}
 	while (argv[1][i])
@@ -124,15 +124,45 @@ void    ft_arg_checker(int argc, char **argv)
 	i -= 4;
 	if (ft_strcmp(&argv[1][i], ".ber"))
 	{
-		write(1, "Wrong Format File!\n", 19);
+		ft_print_string("Wrong Format File!\n");
 		exit(0);
 	}
+}
+void	ft_free_maps(t_struct *game)
+{
+	int	i;
+
+	i = 0;
+	while (game->map[i] && game->map_copy[i])
+	{
+		// printf("game.map[%d]:%s\n", i, game->map[i]);
+		free(game->map[i]);
+		printf("game.map_copy[%d]:%s\n", i, game->map_copy[i]);
+		free(game->map_copy[i]);
+		i++;
+	}
+	// printf("after free game.map[%d]:%s\n", i, game->map[i]);
+	// printf("after free game.map_copy[%d]:%s\n", i, game->map_copy[i]);
+	free(game->map);
+	free(game->map_copy);
 }
 
 // void    on_keypress(int   keysym, t_struct so_long)
 // {
 	
 // }
+int	ft_print_string(char *str)
+{
+	int	count;
+
+	count = 0;
+	write(1, "Error!\n", 7);
+	if (str == NULL)
+		str = "(null)";
+	while (*str)
+		count += write(1, str++, 1);
+	return (count);
+} 
 
 int  main(int argc, char **argv)
 {
@@ -140,11 +170,13 @@ int  main(int argc, char **argv)
 
 	ft_arg_checker(argc, argv);
 	ft_memset(&so_long, 0, (sizeof(so_long)));
-	if (!ft_check_retangle(&so_long, argv[1]) ||
-		!ft_copy_map(&so_long, argv[1]) ||
-		!ft_check_components(&so_long) ||
-		!ft_check_player(&so_long))
-		return (0);
+	if (ft_check_retangle(&so_long, argv[1]) ||
+		ft_copy_map(&so_long, argv[1]) ||
+		ft_full_check(&so_long))
+		{
+			ft_free_maps(&so_long);
+			return (1);
+		}
 	so_long.mlx_ptr = mlx_init();
 	if (!so_long.mlx_ptr)
 		return (1);
