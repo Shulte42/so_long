@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shulte <shulte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/24 14:45:19 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/28 16:14:40 by shulte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,10 +185,8 @@ int  main(int argc, char **argv)
 		free (so_long.mlx_ptr);
 		return (1);
 	}
-	// mlx_hook(so_long.mlx_ptr, KeyRelease, KeyReleaseMask, on_keypress, &so_long);
+	// mlx_key_hook(so_long.mlx_ptr, ft_keypress, &so_long);
+	mlx_hook(so_long.mlx_display, KeyPress, KeyPressMask, ft_keypress, &so_long);
 	mlx_loop(so_long.mlx_ptr);
-	mlx_destroy_window(so_long.mlx_ptr, so_long.mlx_display);
-	mlx_destroy_display(so_long.mlx_ptr);
-	free (so_long.mlx_ptr);
 	return (0);
 }

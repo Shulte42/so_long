@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shulte <shulte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/24 15:54:57 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/28 15:32:46 by shulte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
+
+# define KEY_ESC 65307
+
 
 # include <stdio.h>
 # include <string.h>
@@ -56,6 +59,8 @@ bool	ft_check_exit(t_struct *so_long);
 int	ft_print_string(char *str);
 void	ft_free_maps(t_struct *game);
 bool	ft_check_walls(t_struct *so_long);
+int ft_keypress(int keysym, t_struct *so_long);
+
 
 
 

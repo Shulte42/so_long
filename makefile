@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: shulte <shulte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 14:16:38 by bruda-si          #+#    #+#              #
-#    Updated: 2024/10/24 14:14:01 by bruda-si         ###   ########.fr        #
+#    Updated: 2024/10/28 15:26:09 by shulte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ INC = inc/
 # Source files
 SRCS	=	$(SRC_DIR)main.c \
 			$(SRC_DIR)get_next_line.c \
-			$(SRC_DIR)validade_map.c
+			$(SRC_DIR)validade_map.c \
+			$(SRC_DIR)key_handling.c
 
 OBJS	=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 
