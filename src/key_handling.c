@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:13:29 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/29 12:02:51 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:17:15 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int ft_keypress(int keysym, t_struct *so_long)
 	    free (so_long->mlx_ptr);
         exit (EXIT_SUCCESS);   
     }
+    
     return (0);
 }
