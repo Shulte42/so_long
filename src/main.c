@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shulte <shulte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/28 16:14:40 by shulte           ###   ########.fr       */
+/*   Updated: 2024/10/29 16:50:44 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
-
-#define WEIGHT  400
-#define HEIGHT  400
 
 bool	ft_copy_map(t_struct *so_long, char *fd)
 {
@@ -23,7 +20,7 @@ bool	ft_copy_map(t_struct *so_long, char *fd)
 	i = 0;
 	so_long->fd = open(fd, O_RDONLY, 0);
 	so_long->map = malloc(sizeof(char *) * (so_long->map_height + 1));
-	so_long->map_copy = malloc(sizeof(char *) * (so_long->map_height + 1));
+	so_long->map_copy = malloc(sizeof(char *) * ( so_long->map_height + 1));
 	if (!so_long->map || !so_long->map_copy)
 	{
 		ft_print_string("Fail Allocate Memory for the Map!\n");
@@ -145,10 +142,6 @@ void	ft_free_maps(t_struct *so_long)
 	free(so_long->map_copy);
 }
 
-// void    on_keypress(int   keysym, t_struct so_long)
-// {
-	
-// }
 int	ft_print_string(char *str)
 {
 	int	count;
@@ -178,14 +171,15 @@ int  main(int argc, char **argv)
 	so_long.mlx_ptr = mlx_init();
 	if (!so_long.mlx_ptr)
 		return (1);
-	so_long.mlx_display = mlx_new_window(so_long.mlx_ptr, HEIGHT, WEIGHT, "so_long");
+	so_long.mlx_display = mlx_new_window(so_long.mlx_ptr, (so_long.map_weidth) * 30, (so_long.map_height) * 30, "so_long");
 	if (!so_long.mlx_display)
 	{
 		mlx_destroy_display(so_long.mlx_ptr);
 		free (so_long.mlx_ptr);
 		return (1);
 	}
-	// mlx_key_hook(so_long.mlx_ptr, ft_keypress, &so_long);
+	ft_set_images_pointers(&so_long);
+	ft_place_assets(&so_long);
 	mlx_hook(so_long.mlx_display, KeyPress, KeyPressMask, ft_keypress, &so_long);
 	mlx_loop(so_long.mlx_ptr);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:13:29 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/29 09:43:39 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:02:51 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int ft_keypress(int keysym, t_struct *so_long)
 {
-    printf("The %d has been pressed \n\n", keysym);
     if (keysym == XK_Escape)
     {
         ft_free_maps(so_long);

@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/29 10:59:00 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/29 17:01:52 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # endif
 
 # define KEY_ESC 65307
-
+# define WEIGHT  400
+# define HEIGHT  400
 
 # include <stdio.h>
 # include <string.h>
@@ -37,6 +38,11 @@ typedef struct t_struct
 {
 	void    *mlx_display;
 	void    *mlx_ptr;
+	void	*floor_ptr;
+	void	*player_ptr;
+	void	*walls_ptr;
+	void	*collectables_ptr;
+	void	*exit_ptr;
 	
 	char    **map;
 	char    **map_copy;
@@ -55,19 +61,19 @@ typedef struct t_struct
 	
 }   t_struct;
 
+void    ft_set_images_pointers(t_struct *so_long);
+void	ft_free_maps(t_struct *game);
 bool	ft_full_check(t_struct *so_long);
-char	*ft_get_next_line(int fd);
 bool	ft_check_components(t_struct *so_long);
 bool	ft_check_player(t_struct *so_long);
 bool	ft_check_collectables(t_struct	*so_long);
 bool	ft_check_exit(t_struct *so_long);
-int	ft_print_string(char *str);
-void	ft_free_maps(t_struct *game);
 bool	ft_check_walls(t_struct *so_long);
+char	*ft_get_next_line(int fd);
+int	ft_print_string(char *str);
 int ft_keypress(int keysym, t_struct *so_long);
 int	ft_flood_fill(t_struct *so_long, int y, int x);
-
-
+void    ft_place_assets(t_struct *so_long);
 
 
 
