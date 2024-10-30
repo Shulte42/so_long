@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/30 11:54:19 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/30 14:35:19 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_strlen_gnl(char *str)
 	return (i);
 }
 
-bool	ft_check_retangle(t_struct *so_long, char *fd)
+void	ft_check_retangle(t_struct *so_long, char *fd)
 {
 	char	*line;
 
@@ -59,7 +59,7 @@ bool	ft_check_retangle(t_struct *so_long, char *fd)
 	so_long->map_height = 0;
 	line = ft_get_next_line(so_long->fd);
 	if (!line)
-		return (true);
+		exit(EXIT_FAILURE);
 	so_long->map_weidth = ft_strlen_gnl(line);
 	while (line)
 	{
@@ -68,7 +68,7 @@ bool	ft_check_retangle(t_struct *so_long, char *fd)
 			free(line);
 			close(so_long->fd);
 			ft_print_string("Map not Allowed!\n");
-			return (true);
+			exit(EXIT_FAILURE);
 		}
 		free(line);
 		line = ft_get_next_line(so_long->fd);
@@ -76,7 +76,6 @@ bool	ft_check_retangle(t_struct *so_long, char *fd)
 	}
 	free(line);
 	close(so_long->fd);
-	return (false);
 }
 
 void	*ft_memset(void *ptr, int ch, size_t n)
@@ -161,8 +160,8 @@ int  main(int argc, char **argv)
 
 	ft_arg_checker(argc, argv);
 	ft_memset(&so_long, 0, (sizeof(so_long)));
-	if (ft_check_retangle(&so_long, argv[1]) ||
-		ft_copy_map(&so_long, argv[1]) ||
+	ft_check_retangle(&so_long, argv[1]);
+	if (ft_copy_map(&so_long, argv[1]) ||
 		ft_full_check(&so_long))
 		{
 			ft_free_maps(&so_long);

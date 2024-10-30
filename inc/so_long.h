@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/30 13:55:17 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/30 14:30:25 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # include "../libft/inc/libft.h"
 // # include "get_next_line.h"
 
-typedef struct t_struct
+typedef struct g_struct
 {
 	void    *mlx_display;
 	void    *mlx_ptr;
