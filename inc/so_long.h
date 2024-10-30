@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/30 10:26:39 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/30 13:55:17 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ typedef struct t_struct
 	int     player_x;
 	int     player_y;
 	int		player;
+	int		steps;
 	int		flood_player;
 	int		collectables;
+	int		c_collected;
 	int		flood_collectables;
 	int		exit;
 	int		flood_exit;
