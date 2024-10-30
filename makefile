@@ -6,13 +6,13 @@
 #    By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 14:16:38 by bruda-si          #+#    #+#              #
-#    Updated: 2024/10/29 13:44:26 by bruda-si         ###   ########.fr        #
+#    Updated: 2024/10/30 11:23:14 by bruda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	=	so_long
-CC		=	gcc
+CC		=	cc
 CFLAGS 	= 	-Wall -Wextra -Werror -g -I
 RM		=	rm -f
 # Directories
