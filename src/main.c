@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/29 16:50:44 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:07:18 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ int  main(int argc, char **argv)
 	}
 	ft_set_images_pointers(&so_long);
 	ft_place_assets(&so_long);
-	mlx_hook(so_long.mlx_display, KeyPress, KeyPressMask, ft_keypress, &so_long);
+	mlx_hook(so_long.mlx_display, KeyRelease, KeyReleaseMask, ft_keypress, &so_long);
 	mlx_loop(so_long.mlx_ptr);
 	return (0);
 }

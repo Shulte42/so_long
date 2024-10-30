@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/29 17:01:52 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:26:39 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct t_struct
 {
 	void    *mlx_display;
 	void    *mlx_ptr;
+	
 	void	*floor_ptr;
 	void	*player_ptr;
 	void	*walls_ptr;
