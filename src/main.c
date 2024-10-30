@@ -6,7 +6,7 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:45:49 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/30 14:35:19 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:59:12 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 bool	ft_copy_map(t_struct *so_long, char *fd)
 {
-	int	i;
-	char *map_copy_ptr;
+	int		i;
+	char	*map_copy_ptr;
 
 	i = 0;
 	so_long->fd = open(fd, O_RDONLY, 0);
-	so_long->map = malloc(sizeof(char *) * (so_long->map_height + 1));
-	so_long->map_copy = malloc(sizeof(char *) * ( so_long->map_height + 1));
+	so_long->map = malloc(sizeof(char *) * (so_long->height + 1));
+	so_long->map_copy = malloc(sizeof(char *) * (so_long->height + 1));
 	if (!so_long->map || !so_long->map_copy)
 	{
 		ft_print_string("Fail Allocate Memory for the Map!\n");
 		return (true);
 	}
-	while (i < so_long->map_height)
+	while (i < so_long->height)
 	{
 		so_long->map[i] = ft_get_next_line(so_long->fd);
 		map_copy_ptr = ft_strdup(so_long->map[i]);
 		so_long->map_copy[i] = map_copy_ptr;
-		i++; 
+		i++;
 	}
 	so_long->map[i] = NULL;
 	so_long->map_copy[i] = NULL;
@@ -39,31 +39,19 @@ bool	ft_copy_map(t_struct *so_long, char *fd)
 	return (false);
 }
 
-int	ft_strlen_gnl(char *str)
-{
-	int	i;
-
-	i = 0;
-	if(!str)
-		return (0);
-	while (str[i] != '\n' && str[i] != '\0')
-		i++;
-	return (i);
-}
-
 void	ft_check_retangle(t_struct *so_long, char *fd)
 {
 	char	*line;
 
 	so_long->fd = open(fd, O_RDONLY, 0);
-	so_long->map_height = 0;
+	so_long->height = 0;
 	line = ft_get_next_line(so_long->fd);
 	if (!line)
 		exit(EXIT_FAILURE);
-	so_long->map_weidth = ft_strlen_gnl(line);
+	so_long->width = ft_strlen_gnl(line);
 	while (line)
 	{
-		if (ft_strlen_gnl(line) != so_long->map_weidth)
+		if (ft_strlen_gnl(line) != so_long->width)
 		{
 			free(line);
 			close(so_long->fd);
@@ -72,44 +60,15 @@ void	ft_check_retangle(t_struct *so_long, char *fd)
 		}
 		free(line);
 		line = ft_get_next_line(so_long->fd);
-		so_long->map_height++;
+		so_long->height++;
 	}
 	free(line);
 	close(so_long->fd);
 }
 
-void	*ft_memset(void *ptr, int ch, size_t n)
-{
-	size_t		i;
-	char	*str;
-
-	str = (char	*)ptr;
-	i = 0;
-	while (i < n)
-	{
-		str[i] = ch;
-		i++;
-	}
-	return (str);
-}
-
-bool	ft_strcmp(char	*file, char	*format)
+void	ft_arg_checker(int argc, char **argv)
 {
 	int	i;
-
-	i = 0;
-	while (file[i])
-	{
-		if (file[i] != format[i])
-			return (true);
-		i++;
-	}
-	return (false);
-}
-
-void    ft_arg_checker(int argc, char **argv)
-{
-	int i;
 
 	i = 0;
 	if (argc != 2)
@@ -126,60 +85,32 @@ void    ft_arg_checker(int argc, char **argv)
 		exit(0);
 	}
 }
-void	ft_free_maps(t_struct *so_long)
+
+int	main(int argc, char **argv)
 {
-	int	i;
-
-	i = 0;
-	while (so_long->map[i] && so_long->map_copy[i])
-	{
-		free(so_long->map[i]);
-		free(so_long->map_copy[i]);
-		i++;
-	}
-	free(so_long->map);
-	free(so_long->map_copy);
-}
-
-int	ft_print_string(char *str)
-{
-	int	count;
-
-	count = 0;
-	write(1, "Error!\n", 7);
-	if (str == NULL)
-		str = "(null)";
-	while (*str)
-		count += write(1, str++, 1);
-	return (count);
-} 
-
-int  main(int argc, char **argv)
-{
-	t_struct    so_long;
+	t_struct	sl;
 
 	ft_arg_checker(argc, argv);
-	ft_memset(&so_long, 0, (sizeof(so_long)));
-	ft_check_retangle(&so_long, argv[1]);
-	if (ft_copy_map(&so_long, argv[1]) ||
-		ft_full_check(&so_long))
-		{
-			ft_free_maps(&so_long);
-			return (1);
-		}
-	so_long.mlx_ptr = mlx_init();
-	if (!so_long.mlx_ptr)
-		return (1);
-	so_long.mlx_display = mlx_new_window(so_long.mlx_ptr, (so_long.map_weidth) * 30, (so_long.map_height) * 30, "so_long");
-	if (!so_long.mlx_display)
+	ft_memset(&sl, 0, (sizeof(sl)));
+	ft_check_retangle(&sl, argv[1]);
+	if (ft_copy_map(&sl, argv[1]) || ft_full_check(&sl))
 	{
-		mlx_destroy_display(so_long.mlx_ptr);
-		free (so_long.mlx_ptr);
+		ft_free_maps(&sl);
 		return (1);
 	}
-	ft_set_images_pointers(&so_long);
-	ft_place_assets(&so_long);
-	mlx_hook(so_long.mlx_display, KeyRelease, KeyReleaseMask, ft_keypress, &so_long);
-	mlx_loop(so_long.mlx_ptr);
+	sl.mlx_ptr = mlx_init();
+	if (!sl.mlx_ptr)
+		return (1);
+	sl.mlx_win = MNW(sl.mlx_ptr, (sl.width) * 30, (sl.height) * 30, "so_long");
+	if (!sl.mlx_win)
+	{
+		mlx_destroy_display(sl.mlx_ptr);
+		free (sl.mlx_ptr);
+		return (1);
+	}
+	ft_set_images_pointers(&sl);
+	ft_place_assets(&sl);
+	mlx_hook(sl.mlx_win, KeyRelease, KeyReleaseMask, ft_keypress, &sl);
+	mlx_loop(sl.mlx_ptr);
 	return (0);
 }
