@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: shulte <shulte@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 14:16:38 by bruda-si          #+#    #+#              #
-#    Updated: 2024/10/30 16:05:06 by bruda-si         ###   ########.fr        #
+#    Updated: 2024/10/31 16:50:18 by shulte           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ INC = inc/
 SRCS	=	$(SRC_DIR)main.c \
 			$(SRC_DIR)get_next_line.c \
 			$(SRC_DIR)validade_map.c \
+			$(SRC_DIR)validade_map2.c\
 			$(SRC_DIR)key_handling.c \
 			$(SRC_DIR)map_construct.c \
 			$(SRC_DIR)so_long_utils.c

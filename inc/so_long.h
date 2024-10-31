@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shulte <shulte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/30 16:04:02 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:46:48 by shulte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct g_struct
 
 	char	**map;
 	char	**map_copy;
+	char	*line;
 
 	int		fd;
 	int		height;
@@ -80,6 +81,12 @@ bool	ft_check_player(t_struct *so_long);
 bool	ft_check_collectables(t_struct	*so_long);
 bool	ft_check_exit(t_struct *so_long);
 bool	ft_check_walls(t_struct *so_long);
+
+//Validade map 2
+bool	ft_copy_map(t_struct *so_long, char *fd);
+void	ft_check_retangle(t_struct *so_long, char *fd);
+void	ft_arg_checker(int argc, char **argv);
+
 //Map_construct
 int		ft_flood_fill(t_struct *so_long, int y, int x);
 void	ft_set_images_pointers(t_struct *so_long);

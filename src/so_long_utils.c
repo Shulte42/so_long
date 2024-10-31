@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shulte <shulte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:56:38 by bruda-si          #+#    #+#             */
-/*   Updated: 2024/10/30 16:02:45 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:36:42 by shulte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_print_string(char *str)
 		str = "(null)";
 	while (*str)
 		count += write(1, str++, 1);
+	write(1, "\n", 1);
 	return (count);
 }
 
