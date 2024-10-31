@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: shulte <shulte@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:13:29 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/30 15:45:45 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:41:33 by shulte           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void	ft_end_game_checkers(t_struct *so_long, int y, int x)
 	if (so_long->map[so_long->pl_y][so_long->pl_x] == 'E')
 	{
 		if (so_long->collectables == so_long->c_collected)
+		{
+			write(1, "You have became the King of Pirates!\n", 37);
 			ft_destroy(so_long);
+		}
 	}
 	if (so_long->pl_x != x || so_long->pl_y != y)
 	{
