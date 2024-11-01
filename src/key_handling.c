@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shulte <shulte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:13:29 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/31 17:41:33 by shulte           ###   ########.fr       */
+/*   Updated: 2024/11/01 15:12:21 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,25 @@ void	ft_print_step(int step)
 	}
 }
 
-void	ft_end_game_checkers(t_struct *so_long, int y, int x)
+void	ft_end_game_checkers(t_struct *sl, int y, int x)
 {
-	if (so_long->map[so_long->pl_y][so_long->pl_x] == 'C')
+	if (sl->map[sl->pl_y][sl->pl_x] == 'C')
 	{
-		so_long->map[so_long->pl_y][so_long->pl_x] = '0';
-		so_long->c_collected++;
+		sl->map[sl->pl_y][sl->pl_x] = '0';
+		sl->c_collected++;
 	}
-	if (so_long->map[so_long->pl_y][so_long->pl_x] == 'E')
+	if (sl->map[sl->pl_y][sl->pl_x] == 'E')
 	{
-		if (so_long->collectables == so_long->c_collected)
+		if (sl->collectables == sl->c_collected)
 		{
 			write(1, "You have became the King of Pirates!\n", 37);
-			ft_destroy(so_long);
+			ft_destroy(sl);
 		}
 	}
-	if (so_long->pl_x != x || so_long->pl_y != y)
+	if (sl->pl_x != x || sl->pl_y != y)
 	{
-		so_long->steps++;
-		ft_print_step(so_long->steps);
+		sl->steps++;
+		ft_print_step(sl->steps);
 		write(1, "\n", 1);
 	}
 }
@@ -81,19 +81,16 @@ int	ft_keypress(int keysym, t_struct *sl)
 	x = sl->pl_x;
 	if (sl->map[y][x] != 'E')
 		PIW(sl->mlx_ptr, sl->mlx_win, sl->floor_ptr, x * 30, y * 30);
-	if (keysym == XK_w && sl->map[y - 1][x] != '1')
+	if (keysym == XK_w && ft_collision_check(sl, keysym))
 		sl->pl_y--;
-	else if (keysym == XK_s && sl->map[y + 1][x] != '1')
+	else if (keysym == XK_s && ft_collision_check(sl, keysym))
 		sl->pl_y++;
-	else if (keysym == XK_a && sl->map[y][x - 1] != '1')
+	else if (keysym == XK_a && ft_collision_check(sl, keysym))
 		sl->pl_x--;
-	else if (keysym == XK_d && sl->map[y][x + 1] != '1')
+	else if (keysym == XK_d && ft_collision_check(sl, keysym))
 		sl->pl_x++;
 	else if (keysym == XK_Escape)
-	{
 		ft_destroy(sl);
-		exit(EXIT_SUCCESS);
-	}
 	ft_end_game_checkers(sl, y, x);
 	if (sl->map[sl->pl_y][sl->pl_x] != 'E')
 		PIW(sl->mlx_ptr, sl->mlx_win, sl->pl_ptr, sl->pl_x * 30, sl->pl_y * 30);

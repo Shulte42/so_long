@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shulte <shulte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:54:58 by shulte            #+#    #+#             */
-/*   Updated: 2024/10/31 17:35:48 by shulte           ###   ########.fr       */
+/*   Updated: 2024/11/01 15:04:40 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct g_struct
 	char	**map_copy;
 	char	*line;
 
+	bool	reveal;
+
 	int		fd;
 	int		height;
 	int		width;
@@ -88,6 +90,7 @@ void	ft_check_retangle(t_struct *so_long, char *fd);
 void	ft_arg_checker(int argc, char **argv);
 
 //Map_construct
+bool	ft_collision_check(t_struct *so_long, int keysym);
 int		ft_flood_fill(t_struct *so_long, int y, int x);
 void	ft_set_images_pointers(t_struct *so_long);
 void	ft_place_assets(t_struct *so_long);

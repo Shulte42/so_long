@@ -6,11 +6,33 @@
 /*   By: bruda-si <bruda-si@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 13:13:37 by bruda-si          #+#    #+#             */
-/*   Updated: 2024/10/30 15:53:24 by bruda-si         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:13:58 by bruda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+bool	ft_collision_check(t_struct *sl, int keysym)
+{
+	int	y;
+	int	x;
+
+	y = sl->pl_y;
+	x = sl->pl_x;
+	if (keysym == XK_w)
+		y -= 1;
+	else if (keysym == XK_s)
+		y += 1;
+	else if (keysym == XK_a)
+		x -= 1;
+	else if (keysym == XK_d)
+		x += 1;
+	if (sl->map[y][x] == '1')
+		return (false);
+	if (sl->map[y][x] == 'E' && sl->c_collected != sl->collectables)
+		return (false);
+	return (true);
+}
 
 int	ft_flood_fill(t_struct *so_long, int y, int x)
 {
